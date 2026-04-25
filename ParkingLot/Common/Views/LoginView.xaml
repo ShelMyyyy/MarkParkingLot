@@ -1,0 +1,29 @@
+﻿<UserControl
+    x:Class="ParkingLot.Main.Common.Views.LoginView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ParkingLot.Main.Common.Views"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:Dialog.WindowStartupLocation="CenterScreen"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <prism:Dialog.WindowStyle>
+        <Style TargetType="Window">
+            <!--  2. 禁止调整大小（你要的 NoResize）  -->
+            <Setter Property="ResizeMode" Value="NoResize" />
+
+            <!--  3. 固定对话框宽高（和你 UserControl 一致）  -->
+            <Setter Property="Width" Value="700" />
+            <Setter Property="Height" Value="400" />
+
+            <!--  4. 可选：不显示在任务栏  -->
+            <Setter Property="ShowInTaskbar" Value="False" />
+        </Style>
+    </prism:Dialog.WindowStyle>
+    <Grid>
+        <TextBlock Text="LoginView" />
+    </Grid>
+</UserControl>
