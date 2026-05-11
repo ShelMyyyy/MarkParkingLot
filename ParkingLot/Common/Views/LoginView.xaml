@@ -9,21 +9,101 @@
     prism:Dialog.WindowStartupLocation="CenterScreen"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    Background="White"
     mc:Ignorable="d">
     <prism:Dialog.WindowStyle>
         <Style TargetType="Window">
             <!--  2. 禁止调整大小（你要的 NoResize）  -->
             <Setter Property="ResizeMode" Value="NoResize" />
-
             <!--  3. 固定对话框宽高（和你 UserControl 一致）  -->
-            <Setter Property="Width" Value="700" />
-            <Setter Property="Height" Value="400" />
-
-            <!--  4. 可选：不显示在任务栏  -->
-            <Setter Property="ShowInTaskbar" Value="False" />
+            <Setter Property="Width" Value="750" />
+            <Setter Property="Height" Value="500" />
         </Style>
     </prism:Dialog.WindowStyle>
+    <UserControl.Resources>
+        <Style
+            x:Key="UserNameTextBox"
+            TargetType="TextBox">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Padding" Value="5,3" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <!--  底部横线  -->
+                            <Border x:Name="Line"
+                                Margin="0,28,0,0"
+                                BorderThickness="0,0,0,1"
+                                BorderBrush="#CCCCCC" />
+
+                            <!--  输入区域  -->
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                Margin="0,0,0,5" />
+
+                            <!--  水印文字：未输入 & 未聚焦 时显示  -->
+                            <TextBlock x:Name="Watermark"
+                                Text="账号/电话/邮箱"
+                                Margin="5,0,0,5"
+                                VerticalAlignment="Center"
+                                Foreground="#999999"
+                                FontSize="14"
+                                IsHitTestVisible="False" />
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <!--  鼠标悬浮 → 底部横线高亮  -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Line" Property="BorderBrush" Value="#0078D7" />
+                            </Trigger>
+
+                            <DataTrigger
+                                Binding="{Binding Path=Text, RelativeSource={RelativeSource self}}"
+                                Value="">
+                                <Setter TargetName="Watermark" Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+
+                            <!--  获得焦点 → 水印隐藏  -->
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="Watermark" Property="Visibility" Value="Hidden" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock Text="LoginView" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="0"
+            Source="/ParkingLot.Resources;component/Images/backImg.png"
+            Stretch="Fill" />
+        <StackPanel Grid.Column="1"
+            Margin="0">
+            <TextBlock
+                Text="用户名"
+                Margin="10,90,0,0"
+                FontSize="20"
+                Foreground="#1249bf"
+                FontWeight="Bold" />
+            <TextBox x:Name="txtUserName"
+                FontSize="20"
+                Style="{StaticResource UserNameTextBox}" />
+            <TextBlock
+                Text="密码"
+                Margin="10,40,0,0"
+                FontSize="20"
+                Foreground="#1249bf"
+                FontWeight="Bold" />
+            <TextBox FontSize="20" />
+            <Button
+                Content="登录"
+                Margin="20"
+                FontSize="20" />
+        </StackPanel>
     </Grid>
 </UserControl>

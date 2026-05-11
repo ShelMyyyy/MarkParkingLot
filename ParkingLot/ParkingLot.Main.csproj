@@ -16,4 +16,8 @@
     <Folder Include="Core\Interface\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ParkingLot.Resources\ParkingLot.Resources.csproj" />
+  </ItemGroup>
+
 </Project>

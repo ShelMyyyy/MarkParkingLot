@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingLot.ORM", "ParkingLo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingLot.Core", "ParkingLot.Core\ParkingLot.Core.csproj", "{1B3FAF09-DC07-4370-B388-26C944BF8C08}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingLot.Resources", "ParkingLot.Resources\ParkingLot.Resources.csproj", "{5A6B96A7-F36C-4EED-9D50-BA87E56FAC83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1B3FAF09-DC07-4370-B388-26C944BF8C08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B3FAF09-DC07-4370-B388-26C944BF8C08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B3FAF09-DC07-4370-B388-26C944BF8C08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A6B96A7-F36C-4EED-9D50-BA87E56FAC83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A6B96A7-F36C-4EED-9D50-BA87E56FAC83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A6B96A7-F36C-4EED-9D50-BA87E56FAC83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A6B96A7-F36C-4EED-9D50-BA87E56FAC83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
