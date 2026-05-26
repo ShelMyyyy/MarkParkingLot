@@ -16,5 +16,6 @@ namespace ParkingLot.Main.Common.ViewModels
 			set => SetProperty(ref _id, value);
 		}
 
+
 	}
 }
