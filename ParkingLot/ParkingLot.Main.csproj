@@ -10,6 +10,11 @@
 
   <ItemGroup>
     <PackageReference Include="Prism.DryIoc" Version="9.0.537" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.16">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.16" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,7 +22,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ParkingLot.ORM\ParkingLot.ORM.csproj" />
     <ProjectReference Include="..\ParkingLot.Resources\ParkingLot.Resources.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

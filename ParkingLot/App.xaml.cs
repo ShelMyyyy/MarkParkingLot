@@ -1,20 +1,15 @@
-﻿using ParkingLot.Main.Common.ViewModels;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using ParkingLot.Main.Common.ViewModels;
 using ParkingLot.Main.Common.Views;
-using System.Configuration;
-using System.Data;
+using ParkingLot.ORM;
+using System;
 using System.Windows;
 
 namespace ParkingLot
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : PrismApplication
     {
-        /// <summary>
-        /// 启动后显示哪个窗口
-        /// </summary>
-        /// <returns></returns>
         protected override Window CreateShell()
         {
             return Container.Resolve<MainWindow>();
@@ -22,7 +17,20 @@ namespace ParkingLot
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterDialog<LoginView,LoginViewModel>();
+            containerRegistry.RegisterDialog<LoginView, LoginViewModel>();
+
+            var config = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: false)
+                .Build();
+
+            containerRegistry.RegisterInstance<IConfiguration>(config);
+
+            var connectionString = config.GetConnectionString("DefaultConnection");
+            var options = new DbContextOptionsBuilder<MyDbContext>()
+                .UseSqlServer(connectionString)
+                .Options;
+            containerRegistry.RegisterInstance(options);
         }
 
         // 重写初始化方法，在主窗口显示之前弹出登录窗口

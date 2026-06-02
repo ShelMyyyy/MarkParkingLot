@@ -1,14 +1,25 @@
-﻿using System;
+﻿using ParkingLot.Entity;
+using ParkingLot.ORM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ParkingLot.Main.Common.ViewModels
 {
     public class LoginViewModel : BaseViewModel, IDialogAware
     {
+        public DialogCloseListener RequestClose { get; }
 
+        private readonly MyDbContext _db;
+
+        public LoginViewModel(MyDbContext db)
+        {
+            _db = db;
+            RequestClose = new DialogCloseListener();
+        }
         #region 属性
         private string _title;
         public string Title
@@ -41,7 +52,7 @@ namespace ParkingLot.Main.Common.ViewModels
         /// <summary>
         /// 用来关闭窗口的开关
         /// </summary>
-        public DialogCloseListener RequestClose { get; } 
+       
 
         public bool CanCloseDialog()
         {
@@ -81,10 +92,31 @@ namespace ParkingLot.Main.Common.ViewModels
 
         private void ExecuteLogin()
         {
+          var user=  _db.Users.FirstOrDefault(x => x.Username == Username);
+            if (user == null&&Password!=null)
+            {
+                var nerUser=new UsersEntity()
+                {
+                    Username=Username,
+                    PasswordHash=Password,
+                    Email="",
+                    CreatedAt=DateTime.Now
+                };
+                _db.Users.Add(nerUser);
+                _db.SaveChangesAsync();
+                MessageBox.Show("注册成功");
+                return;
+            }
+            else
+            {
+                MessageBox.Show("登录成功");
+                return;
+            }
             // 实现登录逻辑，例如验证用户名和密码
             if (Username == "admin" && Password == "123456")
             {
                 // 登录成功
+             
             }
             else
             {
@@ -94,7 +126,7 @@ namespace ParkingLot.Main.Common.ViewModels
 
         private bool CanExecuteLogin()
         {
-            //return true;
+            return true;
             return !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password);
         }
 

@@ -7,7 +7,7 @@ namespace ParkingLot.Main.Core.Extensions
     {
         public static readonly DependencyProperty PasswordExProperty =
             DependencyProperty.RegisterAttached(
-                nameof(GetPasswordEx),
+                "PasswordEx",
                 typeof(string),
                 typeof(PasswordBoxHelper),
                 new FrameworkPropertyMetadata(
@@ -29,11 +29,26 @@ namespace ParkingLot.Main.Core.Extensions
         {
             if (d is PasswordBox passwordBox)
             {
-                // 避免在用户输入时产生循环更新
-                if (passwordBox.Password != (e.NewValue?.ToString() ?? string.Empty))
+                // 订阅密码变化事件（只订阅一次）
+                passwordBox.PasswordChanged -= PasswordBox_PasswordChanged;
+                passwordBox.PasswordChanged += PasswordBox_PasswordChanged;
+
+                // 更新密码框内容
+                string newPassword = e.NewValue?.ToString() ?? string.Empty;
+                if (passwordBox.Password != newPassword)
                 {
-                    passwordBox.Password = e.NewValue?.ToString() ?? string.Empty;
+                    passwordBox.Password = newPassword;
                 }
+            }
+        }
+
+        private static void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            var passwordBox = sender as PasswordBox;
+            if (passwordBox != null)
+            {
+                // 将密码变化更新回附加属性
+                SetPasswordEx(passwordBox, passwordBox.Password);
             }
         }
     }
