@@ -11,6 +11,11 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
-        <Button Content="一个巨大的按钮" />
+        <Button
+            Content="主页"
+            FontSize="30"
+            Background="LightBlue"
+            BorderBrush="Red"
+            BorderThickness="2" />
     </Grid>
 </Window>

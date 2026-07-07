@@ -10,7 +10,7 @@ using ParkingLot.ORM;
 
 namespace ParkingLot.ORM.Migrations
 {
-    [DbContext(typeof(MyDbContext))]
+    [DbContext(typeof(UserDbContext))]
     partial class MyDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

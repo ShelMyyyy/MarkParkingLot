@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HandyControl" Version="3.5.1" />
     <PackageReference Include="Prism.DryIoc" Version="9.0.537" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.16">
       <PrivateAssets>all</PrivateAssets>
@@ -22,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ParkingLot.Core\ParkingLot.Core.csproj" />
     <ProjectReference Include="..\ParkingLot.ORM\ParkingLot.ORM.csproj" />
     <ProjectReference Include="..\ParkingLot.Resources\ParkingLot.Resources.csproj" />
   </ItemGroup>

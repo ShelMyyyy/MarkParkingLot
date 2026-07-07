@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using ParkingLot.Core.Service.DBServices;
+using ParkingLot.Core.Service.Interface;
 using ParkingLot.Main.Common.ViewModels;
 using ParkingLot.Main.Common.Views;
 using ParkingLot.ORM;
@@ -27,10 +29,13 @@ namespace ParkingLot
             containerRegistry.RegisterInstance<IConfiguration>(config);
 
             var connectionString = config.GetConnectionString("DefaultConnection");
-            var options = new DbContextOptionsBuilder<MyDbContext>()
+            var userOptions = new DbContextOptionsBuilder<UserDbContext>()
                 .UseSqlServer(connectionString)
                 .Options;
-            containerRegistry.RegisterInstance(options);
+            containerRegistry.RegisterInstance(userOptions);
+
+            containerRegistry.RegisterScoped<IUserDbService, UserDbService>();
+           // containerRegistry.RegisterScoped<DbContext, UserDbContext>();
         }
 
         // 重写初始化方法，在主窗口显示之前弹出登录窗口

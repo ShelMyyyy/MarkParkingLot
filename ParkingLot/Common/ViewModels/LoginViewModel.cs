@@ -1,4 +1,6 @@
-﻿using ParkingLot.Entity;
+﻿using HandyControl.Controls;
+using ParkingLot.Core.Service.Interface;
+using ParkingLot.Entity;
 using ParkingLot.ORM;
 using System;
 using System.Collections.Generic;
@@ -13,11 +15,11 @@ namespace ParkingLot.Main.Common.ViewModels
     {
         public DialogCloseListener RequestClose { get; }
 
-        private readonly MyDbContext _db;
+        private readonly IUserDbService _iUserDbService;
 
-        public LoginViewModel(MyDbContext db)
+        public LoginViewModel(IUserDbService IUserDbService)
         {
-            _db = db;
+            _iUserDbService = IUserDbService;
             RequestClose = new DialogCloseListener();
         }
         #region 属性
@@ -48,11 +50,34 @@ namespace ParkingLot.Main.Common.ViewModels
             get => _rememberPassword;
             set => SetProperty(ref _rememberPassword, value);
         }
+
+
+        private int _backEffect=0;
+        public int BackEffect
+        {
+            get => _backEffect;
+            set => SetProperty(ref _backEffect, value);
+        }
+
+        private bool _isShow =false;
+        public bool IsShow
+        {
+            get => _isShow;
+            set => SetProperty(ref _isShow, value);
+        }
+
+        private string _errorMessage;
+
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set => SetProperty(ref _errorMessage, value);
+        }
+
         #endregion
         /// <summary>
         /// 用来关闭窗口的开关
         /// </summary>
-       
 
         public bool CanCloseDialog()
         {
@@ -92,41 +117,42 @@ namespace ParkingLot.Main.Common.ViewModels
 
         private void ExecuteLogin()
         {
-          var user=  _db.Users.FirstOrDefault(x => x.Username == Username);
-            if (user == null&&Password!=null)
+            IsShow = true;
+            BackEffect = 5;
+            Task.Run(async () =>
             {
-                var nerUser=new UsersEntity()
+                try
                 {
-                    Username=Username,
-                    PasswordHash=Password,
-                    Email="",
-                    CreatedAt=DateTime.Now
-                };
-                _db.Users.Add(nerUser);
-                _db.SaveChangesAsync();
-                MessageBox.Show("注册成功");
-                return;
-            }
-            else
-            {
-                MessageBox.Show("登录成功");
-                return;
-            }
-            // 实现登录逻辑，例如验证用户名和密码
-            if (Username == "admin" && Password == "123456")
-            {
-                // 登录成功
+                    var user = _iUserDbService.Query<UsersEntity>(x => x.Username == Username && x.PasswordHash == Password).FirstOrDefault();
+                    await Task.Delay(3000);
+                    BackEffect = 0;
+                    IsShow = false;
+                    if (user == null)
+                    {
+                        throw new Exception("用户名未注册或密码错误");
+                    }
+                    else
+                    {
+                       // System.Windows.MessageBox.Show("登录成功");
+
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            RequestClose.Invoke(new DialogResult(ButtonResult.OK));
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ErrorMessage=ex.Message;
+                }
              
-            }
-            else
-            {
-                // 登录失败
-            }
+            });
+           
         }
 
         private bool CanExecuteLogin()
         {
-            return true;
+              return true;
             return !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password);
         }
 
