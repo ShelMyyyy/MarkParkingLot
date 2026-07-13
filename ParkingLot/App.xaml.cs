@@ -14,7 +14,7 @@ namespace ParkingLot
     {
         protected override Window CreateShell()
         {
-            return Container.Resolve<MainWindow>();
+            return Container.Resolve<MainWindowView>();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -29,12 +29,13 @@ namespace ParkingLot
             containerRegistry.RegisterInstance<IConfiguration>(config);
 
             var connectionString = config.GetConnectionString("DefaultConnection");
-            var userOptions = new DbContextOptionsBuilder<UserDbContext>()
+            var userOptions = new DbContextOptionsBuilder<ParkingLotDbContext>()
                 .UseSqlServer(connectionString)
                 .Options;
             containerRegistry.RegisterInstance(userOptions);
 
             containerRegistry.RegisterScoped<IUserDbService, UserDbService>();
+            containerRegistry.RegisterScoped<ISysMenuDbService, SysMenuDbService>();
            // containerRegistry.RegisterScoped<DbContext, UserDbContext>();
         }
 
@@ -42,23 +43,24 @@ namespace ParkingLot
         protected override void OnInitialized()
         {
             // 从容器解析DialogService
-            var dialogService = Container.Resolve<IDialogService>();
+            /*  var dialogService = Container.Resolve<IDialogService>();
 
-            var parameters = new DialogParameters();
-            parameters.Add("Width", 700);
-            parameters.Add("Height", 400);
-            parameters.Add("Title", "登录");
+              var parameters = new DialogParameters();
+              parameters.Add("Width", 700);
+              parameters.Add("Height", 400);
+              parameters.Add("Title", "登录");
 
-            // 弹出登录窗口，这时候主窗口还没显示，不会有闪烁
-             dialogService.ShowDialog("LoginView", parameters,result=>
-             {
-                 if (result.Result != ButtonResult.OK)
-                 {
-                     // 如果登录未成功，直接关闭应用
-                     System.Environment.Exit(0);
-                 }
-             });
-            // 登录成功后，再执行base初始化，显示主窗口
+              // 弹出登录窗口，这时候主窗口还没显示，不会有闪烁
+               dialogService.ShowDialog("LoginView", parameters,result=>
+               {
+                   if (result.Result != ButtonResult.OK)
+                   {
+                       // 如果登录未成功，直接关闭应用
+                       System.Environment.Exit(0);
+                   }
+               });
+              // 登录成功后，再执行base初始化，显示主窗口*/
+
             base.OnInitialized();
         }
     }

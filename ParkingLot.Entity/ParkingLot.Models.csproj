@@ -8,13 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\backImg.png" />
-    <None Remove="Images\logo.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Images\backImg.png" />
-    <Resource Include="Images\logo.png" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.16" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.15" />
   </ItemGroup>
 
 </Project>

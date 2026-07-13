@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingLot.Core", "ParkingL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingLot.Resources", "ParkingLot.Resources\ParkingLot.Resources.csproj", "{5A6B96A7-F36C-4EED-9D50-BA87E56FAC83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingLot.Entity", "ParkingLot.Entity\ParkingLot.Entity.csproj", "{44AF2F9E-0C48-4EFF-8E55-7CA3B2E4E5BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingLot.Models", "ParkingLot.Entity\ParkingLot.Models.csproj", "{44AF2F9E-0C48-4EFF-8E55-7CA3B2E4E5BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

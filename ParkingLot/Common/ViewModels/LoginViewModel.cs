@@ -1,12 +1,5 @@
-﻿using HandyControl.Controls;
-using ParkingLot.Core.Service.Interface;
-using ParkingLot.Entity;
-using ParkingLot.ORM;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ParkingLot.Core.Service.Interface;
+using ParkingLot.Models.DataBaseModels;
 using System.Windows;
 
 namespace ParkingLot.Main.Common.ViewModels
@@ -21,6 +14,8 @@ namespace ParkingLot.Main.Common.ViewModels
         {
             _iUserDbService = IUserDbService;
             RequestClose = new DialogCloseListener();
+
+            
         }
         #region 属性
         private string _title;
@@ -52,14 +47,14 @@ namespace ParkingLot.Main.Common.ViewModels
         }
 
 
-        private int _backEffect=0;
+        private int _backEffect = 0;
         public int BackEffect
         {
             get => _backEffect;
             set => SetProperty(ref _backEffect, value);
         }
 
-        private bool _isShow =false;
+        private bool _isShow = false;
         public bool IsShow
         {
             get => _isShow;
@@ -86,7 +81,7 @@ namespace ParkingLot.Main.Common.ViewModels
 
         public void OnDialogClosed()
         {
-            
+
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
@@ -99,7 +94,7 @@ namespace ParkingLot.Main.Common.ViewModels
 
 
         #region 命令
-         private DelegateCommand _loginCommand;
+        private DelegateCommand _loginCommand;
         public DelegateCommand LoginCommand =>
             _loginCommand ?? (_loginCommand = new DelegateCommand(ExecuteLogin, CanExecuteLogin));
 
@@ -108,7 +103,7 @@ namespace ParkingLot.Main.Common.ViewModels
             _forgotPasswordCommand ?? (_forgotPasswordCommand = new DelegateCommand(ExecuteForgotPassword));
         #endregion
 
-       
+
 
         private void ExecuteForgotPassword()
         {
@@ -123,8 +118,8 @@ namespace ParkingLot.Main.Common.ViewModels
             {
                 try
                 {
-                    var user = _iUserDbService.Query<UsersEntity>(x => x.Username == Username && x.PasswordHash == Password).FirstOrDefault();
-                    await Task.Delay(3000);
+                    var user = _iUserDbService.Query<SysUsers>(x => x.Username == Username && x.PasswordHash == Password).FirstOrDefault();
+                    await Task.Delay(2000);
                     BackEffect = 0;
                     IsShow = false;
                     if (user == null)
@@ -133,7 +128,7 @@ namespace ParkingLot.Main.Common.ViewModels
                     }
                     else
                     {
-                       // System.Windows.MessageBox.Show("登录成功");
+                        // System.Windows.MessageBox.Show("登录成功");
 
                         Application.Current.Dispatcher.Invoke(() =>
                         {
@@ -143,16 +138,16 @@ namespace ParkingLot.Main.Common.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    ErrorMessage=ex.Message;
+                    ErrorMessage = ex.Message;
                 }
-             
+
             });
-           
+
         }
 
         private bool CanExecuteLogin()
         {
-              return true;
+            return true;
             return !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password);
         }
 

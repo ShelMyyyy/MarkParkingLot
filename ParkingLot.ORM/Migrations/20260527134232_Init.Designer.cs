@@ -11,7 +11,7 @@ using ParkingLot.ORM;
 
 namespace ParkingLot.ORM.Migrations
 {
-    [DbContext(typeof(UserDbContext))]
+    [DbContext(typeof(ParkingLotDbContext))]
     [Migration("20260527134232_Init")]
     partial class Init
     {

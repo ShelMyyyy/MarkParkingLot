@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ParkingLot.Entity\ParkingLot.Entity.csproj" />
+    <ProjectReference Include="..\ParkingLot.Entity\ParkingLot.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>

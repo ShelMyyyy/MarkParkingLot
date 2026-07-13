@@ -1,9 +1,8 @@
-
 using System.ComponentModel.DataAnnotations;
 
-namespace ParkingLot.Entity
+namespace ParkingLot.Models.DataBaseModels
 {
-    public class UsersEntity
+    public class SysUsers
     {
         [Key]
         public int Id { get; set; }
