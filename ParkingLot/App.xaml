@@ -9,6 +9,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" />
+                <ResourceDictionary>
+                    <FontFamily x:Key="IconsFontFamily">ParkingLot.Resources;component/Font/iconfont.ttf#zx_icons</FontFamily>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </prism:PrismApplication.Resources>

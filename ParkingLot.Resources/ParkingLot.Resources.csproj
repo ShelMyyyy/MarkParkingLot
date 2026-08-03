@@ -8,12 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\backImg.png" />
+    <None Remove="Font\iconfont.ttf" />
+    <None Remove="Images\login_backImg.png" />
     <None Remove="Images\logo.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\backImg.png" />
+    <Resource Include="Font\iconfont.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\login_backImg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\logo.png" />
   </ItemGroup>
 

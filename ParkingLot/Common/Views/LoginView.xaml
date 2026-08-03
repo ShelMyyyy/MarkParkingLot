@@ -142,7 +142,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0"
-                Source="/ParkingLot.Resources;component/Images/backImg.png"
+                Source="/ParkingLot.Resources;component/Images/login_backImg.png"
                 Stretch="Fill" />
             <StackPanel Grid.Column="1"
                 Margin="0">

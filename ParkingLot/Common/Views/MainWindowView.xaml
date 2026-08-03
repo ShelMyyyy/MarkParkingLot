@@ -6,12 +6,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:ParkingLot"
     xmlns:prism="http://prismlibrary.com/"
+    xmlns:converter="clr-namespace:ParkingLot.Core.Converters;assembly=ParkingLot.Core"
     Title="智慧停车场"
     Width="1200"
     Height="750"
     prism:ViewModelLocator.AutoWireViewModel="True"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+    <Window.Resources>
+        <converter:IconCodeToGlyphConverter x:Key="IconCodeToGlyphConverter" />
+        <FontFamily x:Key="IconFontFamily">/Core/Font/iconfont.ttf#zx_icons</FontFamily>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -40,7 +45,17 @@
                 <!--  定义每个树节点怎么显示  -->
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                        <TextBlock Text="{Binding MenuHeader}" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"
+                                Text="{Binding MenuIcon, Converter={StaticResource IconCodeToGlyphConverter}}"
+                                FontFamily="{StaticResource IconFontFamily}" />
+                            <TextBlock Grid.Column="1"
+                                Text="{Binding MenuHeader}" />
+                        </Grid>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>

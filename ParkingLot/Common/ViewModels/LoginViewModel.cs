@@ -119,7 +119,7 @@ namespace ParkingLot.Main.Common.ViewModels
                 try
                 {
                     var user = _iUserDbService.Query<SysUsers>(x => x.Username == Username && x.PasswordHash == Password).FirstOrDefault();
-                    await Task.Delay(2000);
+                    await Task.Delay(1000);
                     BackEffect = 0;
                     IsShow = false;
                     if (user == null)
@@ -138,6 +138,8 @@ namespace ParkingLot.Main.Common.ViewModels
                 }
                 catch (Exception ex)
                 {
+                    BackEffect = 0;
+                    IsShow = false;
                     ErrorMessage = ex.Message;
                 }
 
